@@ -8,12 +8,24 @@ div h1 {
   font-family: fantasy;
 }
 
-img {
+#right {
   max-height: 200px;
   max-width: 100%;
   margin: auto;
 }
 
+#left {
+  max-height: 200px;
+  max-width: 100%;
+  margin: auto;
+
+}
+
+#middle {
+  max-height: 200px;
+  max-width: 100%;
+  margin: auto;
+}
 article {
   text-align: center;
 }
