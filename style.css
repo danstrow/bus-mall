@@ -1,0 +1,46 @@
+body {
+  margin: auto;
+  background-color: lightgray;
+}
+
+div h1 {
+  font-size: 50px;
+  font-family: fantasy;
+}
+
+#right {
+  max-height: 200px;
+  max-width: 100%;
+  margin: auto;
+}
+
+#left {
+  max-height: 200px;
+  max-width: 100%;
+  margin: auto;
+
+}
+
+#middle {
+  max-height: 200px;
+  max-width: 100%;
+  margin: auto;
+}
+article {
+  text-align: center;
+}
+
+article div {
+  display: inline-block;
+}
+
+canvas {
+  width: 90%;
+  height: auto;
+  margin: auto;
+}
+
+header div{
+  text-align: center;
+  margin-bottom: 50px;
+}
