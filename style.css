@@ -5,7 +5,13 @@ h1 {
 }
 
 body {
-  text-align: center;
+  display: center;
+  height: 100%
+}
+
+content {
+  flex: 1 0 auto;
+  padding: 0 10vw;
 }
 
 td {
