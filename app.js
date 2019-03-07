@@ -42,7 +42,9 @@ new Product('unicorn.jpg', 'Unicorns are real');
 new Product('usb.gif', 'USB');
 new Product('water-can.jpg', 'Water Can');
 new Product('wine-glass.jpg', 'Wine Glass');
-
+// function randomize() {
+//   return Math.floor(math.random() * allProducts.length);
+// }
 function chooseProduct() {
   var currentProduct = [];
   do {
@@ -59,20 +61,7 @@ function chooseProduct() {
 var previousPictures = [];
 oneTurn();
 
-function render(currentProduct) {
-  pictureOne.src = currentProduct[0].filepath;
-  pictureOne.title = currentProduct[0].displayName;
 
-  pictureTwo.src = currentProduct[1].filepath;
-  pictureTwo.title = currentProduct[1].displayName;
-
-  pictureThree.src = currentProduct[2].filepath;
-  pictureThree.title = currentProduct[2].displayName;
-
-  pictureOne.addEventListener('click', handleClick);
-  pictureTwo.addEventListener('click', handleClick);
-  pictureThree.addEventListener('click', handleClick);
-}
 
 function oneTurn() {
   var currentProduct = chooseProduct();
@@ -85,6 +74,24 @@ function oneTurn() {
   previousPictures = currentProduct;
 
   clickCount += 1;
+}
+
+function render(currentProduct) {
+  pictureOne.src = currentProduct[0].filepath;
+
+  pictureOne.title = currentProduct[0].displayName;
+
+  pictureTwo.src = currentProduct[1].filepath;
+  pictureTwo.title = currentProduct[1].displayName;
+
+  pictureThree.src = currentProduct[2].filepath;
+  pictureThree.title = currentProduct[2].displayName;
+
+  pictureOne.addEventListener('click', handleClick);
+  pictureTwo.addEventListener('click', handleClick);
+
+
+  pictureThree.addEventListener('click', handleClick);
 }
 
 
@@ -109,6 +116,11 @@ function increaseClickCount(title) {
     }
   }
 }
+// var picContainer = document.getElementById('picture_container');
+// Product.justViewed = [];
+// Product.photos = [document.getElementById('left'), document.getElementById('right'), document.getElementById('middle')];
+// Product.totals = document.getElementNyId('tally');
+// clickCounter = 0;
 
 function createTable() {
   var row = document.createElement('tr');
@@ -158,15 +170,8 @@ function createTable() {
 
 
 
-// var picContainer = document.getElementById('picture_container');
-// Product.justViewed = [];
-// Product.photos = [document.getElementById('left'), document.getElementById('right'), document.getElementById('middle')];
-// Product.totals = document.getElementNyId('tally');
-// clickCounter = 0;
 
-// function randomize() {
-//   return Math.floor(math.random() * allProducts.length);
-// }
+
 
 // function showPics() {
 //   var nowShowing = [];
