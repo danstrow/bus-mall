@@ -1,13 +1,21 @@
 h1 {
   font-family: fantasy, sans-serif;
-  font-size: 20px;
+  font-size: 40px;
   padding: 20px;
+  color: red;
+}
+
+h2 {
+  padding-bottom: 5px;
+  margin: 50px;
+  font-size: 20px;
+  color: darkred;
 }
 
 body {
   display: center;
-  height: 100%
-  width: 50%
+  height: 100%;
+  width: 50%;
 }
 
 content {
@@ -35,12 +43,13 @@ table {
   background-position: 50%;
 } */
 img {
-  
-  height: 500px;
-  width: 500px;
+  height: 300px;
+  width: 300px;
   object-fit: contain;
   border: 6px solid grey;
+  display: inline-block;
 }
+
 
 img:nth-child(2) {
   margin: 0px 75px 0px 75px;
