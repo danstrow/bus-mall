@@ -1,13 +1,19 @@
 'use strict';
 var pix = [];
 var clickCount = 0;
+// new var for lab 12
+var clickChart;
+// end new var for lab 12
+var chartDrawn = false;
+var items = [];
+var votes = [];
 
 var pictureOne = document.getElementById('pictureOne');
 var pictureTwo = document.getElementById('pictureTwo');
 var pictureThree = document.getElementById('pictureThree');
 
 
-var resultsTable = document.getElementById('tallyResults');
+// var resultsTable = document.getElementById('tallyResults');
 
 
 function Product(name, displayName) {
@@ -101,7 +107,7 @@ function handleClick(event) {
     increaseClickCount(event.target.title);
     oneTurn();
   } else if (clickCount === 26) {
-    createTable();
+    drawChart();
     clickCount++;
   } else {
     return;
@@ -116,58 +122,104 @@ function increaseClickCount(title) {
     }
   }
 }
-// var picContainer = document.getElementById('picture_container');
-// Product.justViewed = [];
-// Product.photos = [document.getElementById('left'), document.getElementById('right'), document.getElementById('middle')];
-// Product.totals = document.getElementNyId('tally');
-// clickCounter = 0;
 
-function createTable() {
-  var row = document.createElement('tr');
-  var headerName = document.createElement('td');
-  headerName.innerText = 'Awesome Product';
-  row.appendChild(headerName);
 
-  var headerTotalViews = document.createElement('td');
-  headerTotalViews.innerText = 'Times Shown';
-  row.appendChild(headerTotalViews);
-
-  var headerTotalClicks = document.createElement('td');
-  headerTotalClicks.innerText = 'Clicks';
-  row.appendChild(headerTotalClicks);
-
-  var headerclickPercentage = document.createElement('td');
-  headerclickPercentage.innerText = 'Click Percentage';
-  row.appendChild(headerclickPercentage);
-
-  resultsTable.appendChild(row);
-
+function updateChartArrays() {
   for (var i = 0; i < pix.length; i++) {
-    var imgRow = document.createElement('tr');
-    var nameData = document.createElement('td');
-    nameData.innerText = pix[i].displayName;
-    imgRow.appendChild(nameData);
-
-    var totalViewsData = document.createElement('td');
-    totalViewsData.innerText = pix[i].views;
-    imgRow.appendChild(totalViewsData);
-
-    var totalClicksData = document.createElement('td');
-    totalClicksData.innerText = pix[i].clicks;
-    imgRow.appendChild(totalClicksData);
-
-    var totalclickPercentage = document.createElement('td');
-    var percentage = (Math.floor((pix[i].clicks / pix[i].views) * 100));
-    if (isNaN (percentage)) {
-      percentage = 0;
-    }
-    totalclickPercentage.innerText = (percentage + '%');
-    imgRow.appendChild(totalclickPercentage);
-
-    resultsTable.appendChild(imgRow);
+    items[i] = pix[i].title;
+    votes[i] = pix[i].votes;
   }
 }
+updateChartArrays();
 
+var data = {
+  labels: items,
+  datasets: [
+    {
+      data: votes,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ]
+    }
+  ]
+};
+
+function drawChart() {
+  var ctx = document.getElementById('myChart').getContext('2d');
+
+  clickChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    scales: {
+      yAxes: [{
+        ticks: {
+          max: 10,
+          min: 0,
+          stepSize: 1.0
+        }
+      }]
+    }
+  });
+
+  chartDrawn = true;
+} 
+
+
+
+
+
+// code for tables in lab 11
+// function createTable() {
+//   var row = document.createElement('tr');
+//   var headerName = document.createElement('td');
+//   headerName.innerText = 'Awesome Product';
+//   row.appendChild(headerName);
+
+//   var headerTotalViews = document.createElement('td');
+//   headerTotalViews.innerText = 'Times Shown';
+//   row.appendChild(headerTotalViews);
+
+//   var headerTotalClicks = document.createElement('td');
+//   headerTotalClicks.innerText = 'Clicks';
+//   row.appendChild(headerTotalClicks);
+
+//   var headerclickPercentage = document.createElement('td');
+//   headerclickPercentage.innerText = 'Click Percentage';
+//   row.appendChild(headerclickPercentage);
+
+//   resultsTable.appendChild(row);
+
+//   for (var i = 0; i < pix.length; i++) {
+//     var imgRow = document.createElement('tr');
+//     var nameData = document.createElement('td');
+//     nameData.innerText = pix[i].displayName;
+//     imgRow.appendChild(nameData);
+
+//     var totalViewsData = document.createElement('td');
+//     totalViewsData.innerText = pix[i].views;
+//     imgRow.appendChild(totalViewsData);
+
+//     var totalClicksData = document.createElement('td');
+//     totalClicksData.innerText = pix[i].clicks;
+//     imgRow.appendChild(totalClicksData);
+
+//     var totalclickPercentage = document.createElement('td');
+//     var percentage = (Math.floor((pix[i].clicks / pix[i].views) * 100));
+//     if (isNaN (percentage)) {
+//       percentage = 0;
+//     }
+//     totalclickPercentage.innerText = (percentage + '%');
+//     imgRow.appendChild(totalclickPercentage);
+
+//     resultsTable.appendChild(imgRow);
+//   }
+// }
+// end of code for lab 11
 
 
 
