@@ -107,9 +107,12 @@ function handleClick(event) {
     increaseClickCount(event.target.title);
     oneTurn();
   } else if (clickCount === 26) {
+    updateChartArrays();
     drawChart();
+    
     clickCount++;
   } else {
+    
     return;
   }
 }
@@ -126,11 +129,14 @@ function increaseClickCount(title) {
 
 function updateChartArrays() {
   for (var i = 0; i < pix.length; i++) {
-    items[i] = pix[i].title;
-    votes[i] = pix[i].votes;
+    // items[i] = pix[i].title;
+    // votes[i] = pix[i].votes;
+    items[i] = pix[i].name;
+    votes[i] = pix[i].clicks;
   }
+  console.log('items', items, '\n', 'votes', votes);
 }
-updateChartArrays();
+
 
 var data = {
   labels: items,
@@ -143,6 +149,20 @@ var data = {
         'rgba(255, 206, 86, 0.2)',
         'rgba(75, 192, 192, 0.2)',
         'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
         'rgba(255, 159, 64, 0.2)'
       ]
     }
@@ -151,21 +171,32 @@ var data = {
 
 function drawChart() {
   var ctx = document.getElementById('myChart').getContext('2d');
+  for( var i=0; i < pix.length; i++) {
+    items[i] = pix[i].name;
+    votes[i]= pix[i].clicks;
+  }
 
   clickChart = new Chart(ctx, {
     type: 'bar',
     data: data,
-    scales: {
-      yAxes: [{
-        ticks: {
-          max: 10,
-          min: 0,
-          stepSize: 1.0
-        }
-      }]
+    options: {
+      responsive: false,
+      maintainAspectRatio: false,
+      scales: {
+        legend: {
+          yAxes: [{
+            ticks: {
+              autoSkip: false,       
+              max: 20,
+              min: 0,
+              stepSize: 1
+            }
+          }]
+        } 
+      }
     }
   });
-
+  // clickChart();
   chartDrawn = true;
 } 
 
@@ -224,59 +255,4 @@ function drawChart() {
 
 
 
-
-// function showPics() {
-//   var nowShowing = [];
-//   nowShowing[0] = randomize();
-//   while(Product.justViewed.indexOf(nowShowing[0]) !== -1) {
-//     console.error('Duplicate, rerun!');
-//     nowShowing[0] = randomize();
-//   }
-//   nowShowing[1] = randomize();
-//   while(Product.justViewed[0] === nowShowing[1] || Product.justViewed.indexOf(currentlyShowing[1]) !== -1) {
-//     console.error('Duplicate at center or old view! do again!');
-//     (nowShowing[1] = randomize())
-//   }
-//   (nowShowing[2] = randomize())
-//     while(nowShowing[0] === nowShowing[2] || nowShowing[1] === nowShowing[2] || Product.justViewed.indexOf(nowShowing[2] !== -1) {
-//     console.error('Duplicate at right of old view! do again!');
-//       nowShowing[2] = randomize()
-//     };
-//   console.log(nowShowing)
-//   for(var i =0; i <3; i__) {
-//     Product.pics[i].src = allProducts[nowShowing[i]].source;
-//     Product.pics[i].id = allProducts[nowShowing[i]].name;
-//     allProducts [nowShowing[i]].views +=1;
-//     Product.justViewed[i] = nowShowing[i];
-//   }
-// }
-
-// function showTotals() {
-//   for(var i =0; i < allProducts.length; i++) {
-//     var tally = document.getElementById('tally');
-//     var liEl = document.createElement('li');
-//     liEl.textContent = allProducts[i].name + ' has ' + allProducts[i].votes + ' votes in ' + allProducts[i].views + ' views.';
-//     tally.appendChild(liEl);
-//   }
-// }
-
-// function clickTotals(event) {
-//   if(totalClicks > 24) {
-//     imgContainer.removeEventListener('click', clickTotals);
-//     showTally();
-//   }
-//   if(event.target.id === 'picture_container') {
-//     return alert('Please click an image');
-//   }
-//   totalClicks += 1;
-//   for(var i = 0; i < allProducts.length; i++) {
-//     if(event.target.id === allProducts[i].name) {
-//       allProducts[i].votes +=1;
-//       console.log(event.target.id + ' has ' + allProducts[i]).votes + ' votes in ' + allProducts[i].views + ' views.');
-//     }
-//   }
-//   showPics();
-// }
-// imgContainer.addEventListener('click', handleClick);
-// showPics();
 
