@@ -109,12 +109,22 @@ function handleClick(event) {
   } else if (clickCount === 26) {
     updateChartArrays();
     drawChart();
-    
+    var setPix = JSON.stringify(pix);
+    localStorage.setItem('pix', setPix);
+    var votes = JSON.stringify(votes);
+    localStorage.setItem('votes', votes);
     clickCount++;
   } else {
     
     return;
   }
+}
+
+if(localStorage.pix) {
+  var pix = localStorage.getItem('pix');
+  pix = JSON.parse(pix);
+  var clickCount = localStorage.getItem('clicks');
+  clickCount = JSON.parse(clickCount);
 }
 
 function increaseClickCount(title) {
@@ -125,6 +135,11 @@ function increaseClickCount(title) {
     }
   }
 }
+var reset = document.getElementById('Click Here');
+reset.onclick = function() {
+  localStorage.clear();
+  clickCount = 0;
+};
 
 
 function updateChartArrays() {
